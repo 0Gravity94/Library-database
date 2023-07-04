@@ -1,9 +1,9 @@
-import { addBook, getBookByID } from "./books.model.js";
+import { addBorrow, getBorrowByID } from "./borrows.model.js";
 
-export const insertData = async (req, res) => {
-	const { title, genre_id, author_id, status, quantity } = req.body;
+export const insertBorrow = async (req, res) => {
+	const { user_id } = req.body;
 
-	if (!(title && genre_id && author_id)) {
+	if (!user_id) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -13,7 +13,7 @@ export const insertData = async (req, res) => {
 		});
 	}
 
-	const respModel = await addBook(title, genre_id, author_id, status, quantity);
+	const respModel = await addBorrow(user_id);
 
 	return res.status(200).json({
 		meta: {
@@ -39,7 +39,7 @@ export const getByID = async (req, res) => {
 		});
 	}
 
-	const respModel = await getBookByID(id);
+	const respModel = await getBorrowByID(id);
 
 	return res.status(200).json({
 		meta: {
