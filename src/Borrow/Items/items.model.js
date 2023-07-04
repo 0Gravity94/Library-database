@@ -2,7 +2,12 @@ import { DataTypes } from "sequelize";
 import { newSeq } from "../../../connection.js";
 
 const Borrow_item = newSeq.define("borrow_items", {
-	borow_id: {
+	id: {
+		type: DataTypes.INTEGER,
+		autoIncrement: true,
+		primaryKey: true,
+	},
+	borrow_id: {
 		type: DataTypes.INTEGER,
 		references: {
 			model: "borrows",
@@ -16,6 +21,13 @@ const Borrow_item = newSeq.define("borrow_items", {
 			key: "id",
 		},
 	},
+	status: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
+	returned_at: {
+		type: DataTypes.DATE,
+	},
 });
 
 newSeq
@@ -26,5 +38,25 @@ newSeq
 	.catch((err) => {
 		console.log(`sync error : `, err);
 	});
+
+export const addBorrowItem = async (borrow_idPrm, book_idPrm, statusPrm, returned_atPrm) => {
+	const create = await Borrow_item.create({
+		borrow_id: borrow_idPrm,
+		book_id: book_idPrm,
+		status: statusPrm,
+		returned_at: returned_atPrm,
+	});
+	console.log("borrow item id ", create.id, " added");
+	return create;
+};
+
+export const getBorrowItemByID = async (id) => {
+	const res = await Borrow_item.findOne({
+		where: {
+			id: id,
+		},
+	});
+	return res;
+};
 
 export default Borrow_item;

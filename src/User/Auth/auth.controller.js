@@ -21,7 +21,7 @@ export const insertAuth = (req, res) => {
 			message: "success insert",
 		},
 		data: {
-			id: respModel,
+			respModel,
 		},
 	});
 };
@@ -47,7 +47,7 @@ export const getByID = async (req, res) => {
 			message: "success insert",
 		},
 		data: {
-			id: respModel,
+			respModel,
 		},
 	});
 };

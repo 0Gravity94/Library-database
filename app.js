@@ -16,6 +16,7 @@ import genreRoute from "./src/Genre/genres.routing.js";
 import detailRoute from "./src/User/Detail/detail.routing.js";
 import authRoute from "./src/User/Auth/auth.routing.js";
 import borrowRoute from "./src/Borrow/borrows.routing.js";
+import borrowItemRoute from "./src/Borrow/Items/items.routing.js";
 
 const port = 3300;
 const app = express();
@@ -34,6 +35,7 @@ app.use("/genres", genreRoute);
 app.use("/users_details", detailRoute);
 app.use("/auths", authRoute);
 app.use("/borrows", borrowRoute);
+app.use("/borrow_items", borrowItemRoute);
 
 app.listen(port, () => {
 	console.log(`apps is running on port ${port}`);

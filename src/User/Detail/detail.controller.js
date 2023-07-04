@@ -47,7 +47,7 @@ export const getByID = async (req, res) => {
 			message: "success insert",
 		},
 		data: {
-			id: respModel,
+			respModel,
 		},
 	});
 };

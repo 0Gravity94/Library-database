@@ -1,9 +1,9 @@
-import { addAuthor, getAuthorByID } from "./author.model.js";
+import { addBorrowItem, getBorrowItemByID } from "./items.model.js";
 
-export const newAuthor = (req, res) => {
-	const { full_name, gender, works } = req.body;
+export const borrowItem = async (req, res) => {
+	const { borrow_id, book_id, status, returned_at } = req.body;
 
-	if (!(full_name && gender)) {
+	if (!(borrow_id && book_id && status)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -13,12 +13,12 @@ export const newAuthor = (req, res) => {
 		});
 	}
 
-	const respModel = addAuthor(full_name, gender, works);
+	const respModel = await addBorrowItem(borrow_id, book_id, status, returned_at);
 
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "succes insert",
+			message: "success insert",
 		},
 		data: {
 			respModel,
@@ -39,12 +39,12 @@ export const getByID = async (req, res) => {
 		});
 	}
 
-	const respModel = await getAuthorByID(id);
+	const respModel = await getBorrowItemByID(id);
 
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "succes insert",
+			message: "success insert",
 		},
 		data: {
 			respModel,
