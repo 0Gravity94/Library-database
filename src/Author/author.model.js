@@ -1,7 +1,12 @@
 import { DataTypes } from "sequelize";
 import { newSeq } from "../../connection.js";
 
-const Author = newSeq.define("author", {
+const Author = newSeq.define("authors", {
+	id: {
+		type: DataTypes.INTEGER,
+		autoIncrement: true,
+		primaryKey: true,
+	},
 	full_name: {
 		type: DataTypes.STRING,
 		allowNull: false,
@@ -12,7 +17,6 @@ const Author = newSeq.define("author", {
 	},
 	works: {
 		type: DataTypes.STRING,
-		allowNull: false,
 	},
 });
 
@@ -24,5 +28,24 @@ newSeq
 	.catch((err) => {
 		console.log(`sync error : `, err);
 	});
+
+export const addAuthor = async (full_namePrm, genderPrm, worksPrm) => {
+	const create = await Author.create({
+		full_name: full_namePrm,
+		gender: genderPrm,
+		works: worksPrm,
+	});
+	console.log("author id ", create.id, " added");
+	return create;
+};
+
+export const getAuthorByID = async (id) => {
+	const res = await Author.findOne({
+		where: {
+			id: id,
+		},
+	});
+	return res;
+};
 
 export default Author;
