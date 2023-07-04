@@ -1,9 +1,9 @@
-import { addBook, getBookByID } from "./books.model.js";
+import { addDetail, getDetailByID } from "./detail.model.js";
 
-export const insertData = async (req, res) => {
-	const { title, genre_id, author_id, status, quantity } = req.body;
+export const newDetail = (req, res) => {
+	const { user_id, phone, city, date_of_birth, gender } = req.body;
 
-	if (!(title && genre_id && author_id)) {
+	if (!(user_id && phone && city && date_of_birth && gender)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -13,12 +13,12 @@ export const insertData = async (req, res) => {
 		});
 	}
 
-	const respModel = await addBook(title, genre_id, author_id, status, quantity);
+	const respModel = addDetail(user_id, phone, city, date_of_birth, gender);
 
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "succes insert",
+			message: "success insert",
 		},
 		data: {
 			id: respModel,
@@ -39,12 +39,12 @@ export const getByID = async (req, res) => {
 		});
 	}
 
-	const respModel = await getBookByID(id);
+	const respModel = await getDetailByID(id);
 
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "succes insert",
+			message: "success insert",
 		},
 		data: {
 			id: respModel,

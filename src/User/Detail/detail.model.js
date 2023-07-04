@@ -1,7 +1,12 @@
 import { DataTypes } from "sequelize";
 import { newSeq } from "../../../connection.js";
 
-const Detail = newSeq.define("users_detail", {
+const Detail = newSeq.define("users_details", {
+	id: {
+		type: DataTypes.INTEGER,
+		autoIncrement: true,
+		primaryKey: true,
+	},
 	user_id: {
 		type: DataTypes.INTEGER,
 		references: {
@@ -21,10 +26,6 @@ const Detail = newSeq.define("users_detail", {
 		type: DataTypes.DATE,
 		allowNull: false,
 	},
-	joined_at: {
-		type: DataTypes.DATE,
-		allowNull: false,
-	},
 	gender: {
 		type: DataTypes.STRING,
 		allowNull: false,
@@ -39,5 +40,26 @@ newSeq
 	.catch((err) => {
 		console.log(`sync error : `, err);
 	});
+
+export const addDetail = async (user_idPrm, phonePrm, cityPrm, dobPrm, genderPrm) => {
+	const create = await Detail.create({
+		user_id: user_idPrm,
+		phone: phonePrm,
+		city: cityPrm,
+		date_of_birth: dobPrm,
+		gender: genderPrm,
+	});
+	console.log("detail id ", create.id, " added");
+	return create;
+};
+
+export const getDetailByID = async (id) => {
+	const res = await Detail.findOne({
+		where: {
+			id: id,
+		},
+	});
+	return res;
+};
 
 export default Detail;
