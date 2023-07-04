@@ -12,6 +12,7 @@ import Borrow_item from "./src/Borrow/Items/items.model.js";
 import route from "./src/Book/book.routing.js";
 import authorRoute from "./src/Author/author.routing.js";
 import userRoute from "./src/User/user.routing.js";
+import genreRoute from "./src/Genre/genres.routing.js";
 
 const port = 3300;
 const app = express();
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 app.use("/books", route);
 app.use("/authors", authorRoute);
 app.use("/users", userRoute);
+app.use("/genres", genreRoute);
 
 app.listen(port, () => {
 	console.log(`apps is running on port ${port}`);
