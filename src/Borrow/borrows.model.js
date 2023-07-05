@@ -42,4 +42,9 @@ export const getBorrowByID = async (id) => {
 	return res;
 };
 
+export const allBorrows = async () => {
+	const response = await Borrow.findAll();
+	return response;
+};
+
 export default Borrow;
