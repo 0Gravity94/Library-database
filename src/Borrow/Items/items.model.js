@@ -59,4 +59,9 @@ export const getBorrowItemByID = async (id) => {
 	return res;
 };
 
+export const allBorrowItems = async () => {
+	const response = await Borrow_item.findAll();
+	return response;
+};
+
 export default Borrow_item;

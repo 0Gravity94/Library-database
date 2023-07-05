@@ -39,4 +39,9 @@ export const getGenreByID = async (id) => {
 	return res;
 };
 
+export const allGenres = async () => {
+	const response = await Genre.findAll();
+	return response;
+};
+
 export default Genre;

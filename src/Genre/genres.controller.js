@@ -1,4 +1,4 @@
-import { addGenre, getGenreByID } from "./genres.model.js";
+import { addGenre, allGenres, getGenreByID } from "./genres.model.js";
 
 export const newGenre = (req, res) => {
 	const { genre_name } = req.body;
@@ -45,6 +45,20 @@ export const getByID = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success insert",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const getAllGenres = async (req, res) => {
+	const respModel = await allGenres();
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "success get",
 		},
 		data: {
 			respModel,
