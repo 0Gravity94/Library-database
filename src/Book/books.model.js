@@ -9,7 +9,6 @@ const Book = newSeq.define("books", {
 	},
 	title: {
 		type: DataTypes.STRING,
-		defaultValue: String,
 		allowNull: false,
 	},
 	genre_id: {
@@ -57,13 +56,18 @@ export const addBook = async (titlePrm, genre_idPrm, author_idPrm, statusPrm, qu
 	return create;
 };
 
-export const getBookByID = async (id) => {
+export const getBookByID = async (idPrm) => {
 	const res = await Book.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;
+};
+
+export const allBooks = async () => {
+	const response = await Book.findAll();
+	return response;
 };
 
 export default Book;

@@ -1,4 +1,4 @@
-import { addBook, getBookByID } from "./books.model.js";
+import Book, { addBook, allBooks, getBookByID } from "./books.model.js";
 
 export const insertData = async (req, res) => {
 	const { title, genre_id, author_id, status, quantity } = req.body;
@@ -27,7 +27,7 @@ export const insertData = async (req, res) => {
 };
 
 export const getByID = async (req, res) => {
-	const { id } = req.param;
+	const { id } = req.params;
 
 	if (!id) {
 		return res.status(400).json({
@@ -45,6 +45,20 @@ export const getByID = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success insert",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const getAllBooks = async (req, res) => {
+	const respModel = await allBooks();
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "success get",
 		},
 		data: {
 			respModel,
