@@ -1,4 +1,4 @@
-import { addAuthor, getAuthorByID } from "./author.model.js";
+import { addAuthor, allAuthors, getAuthorByID } from "./author.model.js";
 
 export const newAuthor = (req, res) => {
 	const { full_name, gender, works } = req.body;
@@ -48,6 +48,20 @@ export const getByID = async (req, res) => {
 		},
 		data: {
 			respModel,
+		},
+	});
+};
+
+export const getAllAuthors = async (req, res) => {
+	const response = await allAuthors();
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "success get",
+		},
+		data: {
+			response,
 		},
 	});
 };

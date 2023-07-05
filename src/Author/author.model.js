@@ -48,4 +48,9 @@ export const getAuthorByID = async (id) => {
 	return res;
 };
 
+export const allAuthors = async () => {
+	const response = await Author.findAll();
+	return response;
+};
+
 export default Author;
