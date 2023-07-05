@@ -36,6 +36,7 @@ app.use("/users_details", detailRoute);
 app.use("/auths", authRoute);
 app.use("/borrows", borrowRoute);
 app.use("/borrow_items", borrowItemRoute);
+app.use("/login", authRoute);
 
 app.listen(port, () => {
 	console.log(`apps is running on port ${port}`);

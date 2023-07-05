@@ -11,6 +11,11 @@ const User = newSeq.define("users", {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
+	username: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		unique: true,
+	},
 });
 
 newSeq
@@ -28,6 +33,14 @@ export const addUser = async (full_namePrm) => {
 	});
 	console.log("user id ", create.id, " added");
 	return create;
+};
+
+export const getUserByUsername = async (un) => {
+	const res = await User.findOne({
+		where: {
+			username: un,
+		},
+	});
 };
 
 export const getUserByID = async (id) => {
