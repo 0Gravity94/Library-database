@@ -30,10 +30,10 @@ export const addGenre = async (genre_namePrm) => {
 	return create;
 };
 
-export const getGenreByID = async (id) => {
+export const getGenreByID = async (idPrm) => {
 	const res = await Genre.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;
