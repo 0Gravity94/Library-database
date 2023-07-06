@@ -33,10 +33,10 @@ export const addBorrow = async (user_idPrm) => {
 	return create;
 };
 
-export const getBorrowByID = async (id) => {
+export const getBorrowByID = async (idPrm) => {
 	const res = await Borrow.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;

@@ -27,7 +27,7 @@ export const insertBorrow = async (req, res) => {
 };
 
 export const getByID = async (req, res) => {
-	const { id } = req.param;
+	const { id } = req.params;
 
 	if (!id) {
 		return res.status(400).json({
@@ -44,7 +44,7 @@ export const getByID = async (req, res) => {
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "success insert",
+			message: `get borrow id: ${id}`,
 		},
 		data: {
 			respModel,
