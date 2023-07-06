@@ -39,10 +39,10 @@ export const addAuthor = async (full_namePrm, genderPrm, worksPrm) => {
 	return create;
 };
 
-export const getAuthorByID = async (id) => {
+export const getAuthorByID = async (idPrm) => {
 	const res = await Author.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;
