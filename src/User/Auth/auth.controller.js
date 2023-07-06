@@ -1,6 +1,6 @@
 import jwtController from "jsonwebtoken";
 import { getUserByUsername } from "../user.model.js";
-import { addAuthentication, getAuthByID } from "./auth.model.js";
+import { addAuthentication, allAuths, getAuthByID } from "./auth.model.js";
 
 export const insertAuth = (req, res) => {
 	const { user_id, password } = req.body;
@@ -53,6 +53,21 @@ export const getByID = async (req, res) => {
 		},
 	});
 };
+
+export const getAllAuths = async (req, res) => {
+	const respModel = await allAuths();
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
 export const loginAuth = async (req, res) => {
 	const { username, password } = req.body;
 

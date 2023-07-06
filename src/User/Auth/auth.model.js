@@ -38,6 +38,11 @@ export const addAuthentication = async (user_idPrm, passwordPrm) => {
 	return create;
 };
 
+export const allAuths = async () => {
+	const response = await Auth.findAll();
+	return response;
+};
+
 export const getAuthByID = async (id) => {
 	const res = await Auth.findOne({
 		where: {
