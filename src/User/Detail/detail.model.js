@@ -53,6 +53,11 @@ export const addDetail = async (user_idPrm, phonePrm, cityPrm, dobPrm, genderPrm
 	return create;
 };
 
+export const allDetails = async () => {
+	const response = await Detail.findAll();
+	return response;
+};
+
 export const getDetailByID = async (id) => {
 	const res = await Detail.findOne({
 		where: {
