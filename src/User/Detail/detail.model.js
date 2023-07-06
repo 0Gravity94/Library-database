@@ -58,10 +58,10 @@ export const allDetails = async () => {
 	return response;
 };
 
-export const getDetailByID = async (id) => {
+export const getDetailByID = async (idPrm) => {
 	const res = await Detail.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;

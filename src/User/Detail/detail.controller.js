@@ -27,7 +27,7 @@ export const newDetail = (req, res) => {
 };
 
 export const getByID = async (req, res) => {
-	const { id } = req.param;
+	const { id } = req.params;
 
 	if (!id) {
 		return res.status(400).json({
@@ -44,7 +44,7 @@ export const getByID = async (req, res) => {
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "success insert",
+			message: `get user detail by id: ${id}`,
 		},
 		data: {
 			respModel,
