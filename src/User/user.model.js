@@ -35,12 +35,9 @@ export const addUser = async (full_namePrm) => {
 	return create;
 };
 
-export const getUserByUsername = async (un) => {
-	const res = await User.findOne({
-		where: {
-			username: un,
-		},
-	});
+export const allUsers = async () => {
+	const response = await User.findAll();
+	return response;
 };
 
 export const getUserByID = async (id) => {
@@ -50,6 +47,14 @@ export const getUserByID = async (id) => {
 		},
 	});
 	return res;
+};
+
+export const getUserByUsername = async (un) => {
+	const res = await User.findOne({
+		where: {
+			username: un,
+		},
+	});
 };
 
 export default User;

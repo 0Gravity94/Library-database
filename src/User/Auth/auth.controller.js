@@ -81,7 +81,7 @@ export const loginAuth = async (req, res) => {
 	if (user.password === password) {
 		const token = jwtController.sign(
 			{
-				userid: user.id,
+				userid: user.id, //payload (data yang nanti ditampilkan)
 				name: user.full_name,
 			},
 			"silahkan",

@@ -1,7 +1,7 @@
 import JSONtoken from "jsonwebtoken";
 
 export const tokenVerify = (req, res, next) => {
-	const auth = req.header["authorization"];
+	const auth = req.headers["authorization"];
 
 	if (!auth) {
 		return res.status(400).json({

@@ -1,4 +1,4 @@
-import { addUser, getUserByID } from "./user.model.js";
+import { addUser, allUsers, getUserByID } from "./user.model.js";
 
 export const newUser = (req, res) => {
 	const { full_name } = req.body;
@@ -45,6 +45,20 @@ export const getByID = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success insert",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const getAllUsers = async (req, res) => {
+	const respModel = await allUsers();
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "success get",
 		},
 		data: {
 			respModel,
