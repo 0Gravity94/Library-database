@@ -43,10 +43,10 @@ export const allAuths = async () => {
 	return response;
 };
 
-export const getAuthByID = async (id) => {
+export const getAuthByID = async (idPrm) => {
 	const res = await Auth.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;
