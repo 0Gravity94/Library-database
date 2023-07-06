@@ -40,10 +40,10 @@ export const allUsers = async () => {
 	return response;
 };
 
-export const getUserByID = async (id) => {
+export const getUserByID = async (idPrm) => {
 	const res = await User.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;
