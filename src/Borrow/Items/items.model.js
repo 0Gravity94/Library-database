@@ -50,10 +50,10 @@ export const addBorrowItem = async (borrow_idPrm, book_idPrm, statusPrm, returne
 	return create;
 };
 
-export const getBorrowItemByID = async (id) => {
+export const getBorrowItemByID = async (idPrm) => {
 	const res = await Borrow_item.findOne({
 		where: {
-			id: id,
+			id: idPrm,
 		},
 	});
 	return res;
