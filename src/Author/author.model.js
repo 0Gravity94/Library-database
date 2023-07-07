@@ -53,12 +53,13 @@ export const allAuthors = async () => {
 	return response;
 };
 
-export const deleteAuthor = (idPrm) => {
-	Author.destroy({
+export const deleteAuthor = async (idPrm) => {
+	const response = await Author.destroy({
 		where: {
 			id: idPrm,
 		},
 	});
+	return response;
 };
 
 export default Author;

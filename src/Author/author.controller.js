@@ -1,4 +1,4 @@
-import { addAuthor, allAuthors, deleteAuthor, getAuthorByID } from "./author.model.js";
+import Author, { addAuthor, allAuthors, deleteAuthor, getAuthorByID } from "./author.model.js";
 
 export const newAuthor = (req, res) => {
 	const { full_name, gender, works } = req.body;
@@ -91,3 +91,16 @@ export const deleteAuthorByID = (req, res) => {
 		},
 	});
 };
+
+// export const deleteAuthors = async (req, res) => {
+// 	try {
+// 		await Author.destroy({
+// 			where: {
+// 				id: req.params.id,
+// 			},
+// 		});
+// 		res.status(201).json({ msg: "Author deleted" });
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
