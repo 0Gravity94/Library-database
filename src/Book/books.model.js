@@ -70,4 +70,12 @@ export const allBooks = async () => {
 	return response;
 };
 
+export const deleteBook = (idPrm) => {
+	Book.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+};
+
 export default Book;
