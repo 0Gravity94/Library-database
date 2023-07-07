@@ -91,16 +91,3 @@ export const deleteAuthorByID = (req, res) => {
 		},
 	});
 };
-
-// export const deleteAuthors = async (req, res) => {
-// 	try {
-// 		await Author.destroy({
-// 			where: {
-// 				id: req.params.id,
-// 			},
-// 		});
-// 		res.status(201).json({ msg: "Author deleted" });
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };

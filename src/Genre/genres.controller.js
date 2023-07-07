@@ -1,4 +1,4 @@
-import { addGenre, allGenres, getGenreByID } from "./genres.model.js";
+import { addGenre, allGenres, deleteGenre, getGenreByID } from "./genres.model.js";
 
 export const newGenre = (req, res) => {
 	const { genre_name } = req.body;
@@ -59,6 +59,32 @@ export const getAllGenres = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const deleteGenreByID = (req, res) => {
+	const { id } = req.params;
+
+	if (!id) {
+		return res.status(400).json({
+			meta: {
+				code: "01-400",
+				message: "Cannot delete genre",
+			},
+			data: {},
+		});
+	}
+
+	const respModel = deleteGenre(id);
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "delete success",
 		},
 		data: {
 			respModel,

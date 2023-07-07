@@ -44,4 +44,13 @@ export const allGenres = async () => {
 	return response;
 };
 
+export const deleteGenre = async (idPrm) => {
+	const response = await Genre.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+	return response;
+};
+
 export default Genre;
