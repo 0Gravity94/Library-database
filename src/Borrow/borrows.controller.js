@@ -1,4 +1,4 @@
-import { addBorrow, allBorrows, getBorrowByID } from "./borrows.model.js";
+import { addBorrow, allBorrows, deleteBorrow, getBorrowByID } from "./borrows.model.js";
 
 export const insertBorrow = async (req, res) => {
 	const { user_id } = req.body;
@@ -59,6 +59,32 @@ export const getAllBorrows = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const deleteBorrowByID = (req, res) => {
+	const { id } = req.params;
+
+	if (!id) {
+		return res.status(400).json({
+			meta: {
+				code: "01-400",
+				message: `Cannot delete borrow id: ${id}`,
+			},
+			data: {},
+		});
+	}
+
+	const respModel = deleteBorrow(id);
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "delete success",
 		},
 		data: {
 			respModel,

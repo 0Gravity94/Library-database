@@ -47,4 +47,13 @@ export const allBorrows = async () => {
 	return response;
 };
 
+export const deleteBorrow = async (idPrm) => {
+	const response = await Borrow.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+	return response;
+};
+
 export default Borrow;
