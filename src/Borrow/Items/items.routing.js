@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { borrowItem, getAllBorrowItems, getByID } from "./items.controller.js";
+import { borrowItem, deleteBorrowItemByID, getAllBorrowItems, getByID } from "./items.controller.js";
 
 const borrowItemRoute = Router();
 
 borrowItemRoute.post("", borrowItem);
 borrowItemRoute.get("/:id", getByID);
 borrowItemRoute.get("", getAllBorrowItems);
+borrowItemRoute.delete("/:id", deleteBorrowItemByID);
 
 export default borrowItemRoute;

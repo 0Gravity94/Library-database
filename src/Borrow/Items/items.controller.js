@@ -1,4 +1,4 @@
-import { addBorrowItem, allBorrowItems, getBorrowItemByID } from "./items.model.js";
+import { addBorrowItem, allBorrowItems, deleteBorrowItem, getBorrowItemByID } from "./items.model.js";
 
 export const borrowItem = async (req, res) => {
 	const { borrow_id, book_id, status, returned_at } = req.body;
@@ -59,6 +59,32 @@ export const getAllBorrowItems = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const deleteBorrowItemByID = (req, res) => {
+	const { id } = req.params;
+
+	if (!id) {
+		return res.status(400).json({
+			meta: {
+				code: "01-400",
+				message: "Cannot delete borrow item",
+			},
+			data: {},
+		});
+	}
+
+	const respModel = deleteBorrowItem(id);
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "delete success",
 		},
 		data: {
 			respModel,

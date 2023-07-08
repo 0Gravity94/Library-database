@@ -64,4 +64,13 @@ export const allBorrowItems = async () => {
 	return response;
 };
 
+export const deleteBorrowItem = async (idPrm) => {
+	const response = await Borrow_item.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+	return response;
+};
+
 export default Borrow_item;
