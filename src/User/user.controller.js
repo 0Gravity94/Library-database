@@ -1,4 +1,4 @@
-import { addUser, allUsers, getUserByID } from "./user.model.js";
+import { addUser, allUsers, deleteUser, getUserByID } from "./user.model.js";
 
 export const newUser = (req, res) => {
 	const { full_name } = req.body;
@@ -44,7 +44,7 @@ export const getByID = async (req, res) => {
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "success insert",
+			message: `get user by id: ${id}`,
 		},
 		data: {
 			respModel,
@@ -59,6 +59,32 @@ export const getAllUsers = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const deleteUserByID = (req, res) => {
+	const { id } = req.params;
+
+	if (!id) {
+		return res.status(400).json({
+			meta: {
+				code: "01-400",
+				message: "Cannot delete user",
+			},
+			data: {},
+		});
+	}
+
+	const respModel = deleteUser(id);
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "delete success",
 		},
 		data: {
 			respModel,

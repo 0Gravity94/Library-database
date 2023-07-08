@@ -57,4 +57,13 @@ export const getUserByUsername = async (un) => {
 	});
 };
 
+export const deleteUser = async (idPrm) => {
+	const response = await User.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+	return response;
+};
+
 export default User;
