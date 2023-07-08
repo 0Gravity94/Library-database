@@ -67,4 +67,13 @@ export const getDetailByID = async (idPrm) => {
 	return res;
 };
 
+export const deleteUserDetail = async (idPrm) => {
+	const response = await Detail.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+	return response;
+};
+
 export default Detail;

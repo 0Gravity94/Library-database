@@ -1,4 +1,4 @@
-import { addDetail, allDetails, getDetailByID } from "./detail.model.js";
+import { addDetail, allDetails, deleteUserDetail, getDetailByID } from "./detail.model.js";
 
 export const newDetail = (req, res) => {
 	const { user_id, phone, city, date_of_birth, gender } = req.body;
@@ -59,6 +59,32 @@ export const getAllDetails = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const deleteDetailByID = (req, res) => {
+	const { id } = req.params;
+
+	if (!id) {
+		return res.status(400).json({
+			meta: {
+				code: "01-400",
+				message: "Cannot delete detail",
+			},
+			data: {},
+		});
+	}
+
+	const respModel = deleteUserDetail(id);
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "delete success",
 		},
 		data: {
 			respModel,
