@@ -1,6 +1,6 @@
 import jwtController from "jsonwebtoken";
 import { getUserByUsername } from "../user.model.js";
-import { addAuthentication, allAuths, getAuthByID } from "./auth.model.js";
+import { addAuthentication, allAuths, deleteAuth, getAuthByID } from "./auth.model.js";
 
 export const insertAuth = (req, res) => {
 	const { user_id, password } = req.body;
@@ -61,6 +61,32 @@ export const getAllAuths = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: "success get",
+		},
+		data: {
+			respModel,
+		},
+	});
+};
+
+export const deleteAuthByID = (req, res) => {
+	const { id } = req.params;
+
+	if (!id) {
+		return res.status(400).json({
+			meta: {
+				code: "01-400",
+				message: "Cannot delete authentication",
+			},
+			data: {},
+		});
+	}
+
+	const respModel = deleteAuth(id);
+
+	return res.status(200).json({
+		meta: {
+			code: "01-200",
+			message: "delete success",
 		},
 		data: {
 			respModel,

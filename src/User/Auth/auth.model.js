@@ -52,4 +52,13 @@ export const getAuthByID = async (idPrm) => {
 	return res;
 };
 
+export const deleteAuth = async (idPrm) => {
+	const response = await Auth.destroy({
+		where: {
+			id: idPrm,
+		},
+	});
+	return response;
+};
+
 export default Auth;
