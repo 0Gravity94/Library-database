@@ -1,4 +1,4 @@
-import { addUser, allUsers, deleteUser, getUserByID } from "./user.model.js";
+import User, { addUser, allUsers, deleteUser, getUserByID } from "./user.model.js";
 
 export const newUser = (req, res) => {
 	const { full_name, username } = req.body;
@@ -90,4 +90,17 @@ export const deleteUserByID = (req, res) => {
 			respModel,
 		},
 	});
+};
+
+export const updateUserByID = async (req, res) => {
+	try {
+		await User.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: "success update user" });
+	} catch (err) {
+		console.log(err);
+	}
 };
