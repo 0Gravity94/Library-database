@@ -1,4 +1,4 @@
-import { addBorrow, allBorrows, deleteBorrow, getBorrowByID } from "./borrows.model.js";
+import Borrow, { addBorrow, allBorrows, deleteBorrow, getBorrowByID } from "./borrows.model.js";
 
 export const insertBorrow = async (req, res) => {
 	const { user_id } = req.body;
@@ -90,4 +90,17 @@ export const deleteBorrowByID = (req, res) => {
 			respModel,
 		},
 	});
+};
+
+export const updateBorrowByID = async (req, res) => {
+	try {
+		await Borrow.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: "success update borrow" });
+	} catch (err) {
+		console.log(err);
+	}
 };
