@@ -91,3 +91,16 @@ export const deleteBookByID = (req, res) => {
 		},
 	});
 };
+
+export const updateBookByID = async (req, res) => {
+	try {
+		await Book.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: "success update book" });
+	} catch (err) {
+		console.log(err);
+	}
+};
