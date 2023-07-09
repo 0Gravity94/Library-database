@@ -27,9 +27,10 @@ newSeq
 		console.log(`sync error : `, err);
 	});
 
-export const addUser = async (full_namePrm) => {
+export const addUser = async (full_namePrm, usernamePrm) => {
 	const create = await User.create({
 		full_name: full_namePrm,
+		username: usernamePrm,
 	});
 	console.log("user id ", create.id, " added");
 	return create;
