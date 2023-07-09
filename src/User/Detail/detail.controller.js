@@ -1,4 +1,4 @@
-import { addDetail, allDetails, deleteUserDetail, getDetailByID } from "./detail.model.js";
+import Detail, { addDetail, allDetails, deleteUserDetail, getDetailByID } from "./detail.model.js";
 
 export const newDetail = (req, res) => {
 	const { user_id, phone, city, date_of_birth, gender } = req.body;
@@ -90,4 +90,17 @@ export const deleteDetailByID = (req, res) => {
 			respModel,
 		},
 	});
+};
+
+export const updateUserDetailByID = async (req, res) => {
+	try {
+		await Detail.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: "success update user detail" });
+	} catch (err) {
+		console.log(err);
+	}
 };
