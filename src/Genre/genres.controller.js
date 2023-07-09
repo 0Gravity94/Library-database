@@ -1,4 +1,4 @@
-import { addGenre, allGenres, deleteGenre, getGenreByID } from "./genres.model.js";
+import Genre, { addGenre, allGenres, deleteGenre, getGenreByID } from "./genres.model.js";
 
 export const newGenre = (req, res) => {
 	const { genre_name } = req.body;
@@ -90,4 +90,17 @@ export const deleteGenreByID = (req, res) => {
 			respModel,
 		},
 	});
+};
+
+export const updateGenreByID = async (req, res) => {
+	try {
+		await Genre.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: `success update genre` });
+	} catch (err) {
+		console.log(err);
+	}
 };
