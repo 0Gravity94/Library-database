@@ -1,6 +1,6 @@
 import jwtController from "jsonwebtoken";
 import { getUserByUsername } from "../user.model.js";
-import { addAuthentication, allAuths, deleteAuth, getAuthByID } from "./auth.model.js";
+import Auth, { addAuthentication, allAuths, deleteAuth, getAuthByID } from "./auth.model.js";
 
 export const insertAuth = (req, res) => {
 	const { user_id, password } = req.body;
@@ -92,6 +92,19 @@ export const deleteAuthByID = (req, res) => {
 			respModel,
 		},
 	});
+};
+
+export const updateAuthByID = async (req, res) => {
+	try {
+		await Auth.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: "success update author" });
+	} catch (err) {
+		console.log(err);
+	}
 };
 
 export const loginAuth = async (req, res) => {
