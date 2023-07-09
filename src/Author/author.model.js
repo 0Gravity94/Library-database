@@ -62,4 +62,13 @@ export const deleteAuthor = async (idPrm) => {
 	return response;
 };
 
+// export const updateAuthor = async (idPrm) => {
+// 	const response = await Author.update({
+// 		where: {
+// 			id: idPrm,
+// 		},
+// 	});
+// 	return response;
+// };
+
 export default Author;

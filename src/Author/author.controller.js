@@ -91,3 +91,43 @@ export const deleteAuthorByID = (req, res) => {
 		},
 	});
 };
+
+// export const updateAuthorByID = async (req, res) => {
+// 	const { id } = req.params;
+// 	const { full_name, gender } = req.body;
+
+// 	if (!id) {
+// 		return res.status(400).json({
+// 			meta: {
+// 				code: "01-400",
+// 				message: "Cannot update author",
+// 			},
+// 			data: {},
+// 		});
+// 	}
+
+// 	const respModel = await updateAuthor(full_name, gender);
+
+// 	return res.status(200).json({
+// 		meta: {
+// 			code: "01-200",
+// 			message: "update success",
+// 		},
+// 		data: {
+// 			respModel,
+// 		},
+// 	});
+// };
+
+export const updateAuthorByID = async (req, res) => {
+	try {
+		await Author.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: "success update author" });
+	} catch (err) {
+		console.log(err);
+	}
+};
