@@ -1,4 +1,4 @@
-import { addBorrowItem, allBorrowItems, deleteBorrowItem, getBorrowItemByID } from "./items.model.js";
+import Borrow_item, { addBorrowItem, allBorrowItems, deleteBorrowItem, getBorrowItemByID } from "./items.model.js";
 
 export const borrowItem = async (req, res) => {
 	const { borrow_id, book_id, status, returned_at } = req.body;
@@ -90,4 +90,17 @@ export const deleteBorrowItemByID = (req, res) => {
 			respModel,
 		},
 	});
+};
+
+export const updateBorrowItemByID = async (req, res) => {
+	try {
+		await Borrow_item.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(201).json({ msg: `success update borrow item` });
+	} catch (err) {
+		console.log(err);
+	}
 };
