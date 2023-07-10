@@ -7,10 +7,10 @@ const User = newSeq.define("users", {
 		autoIncrement: true,
 		primaryKey: true,
 	},
-	full_name: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
+	// full_name: {
+	// 	type: DataTypes.STRING,
+	// 	allowNull: false,
+	// },
 	username: {
 		type: DataTypes.STRING,
 		allowNull: false,
@@ -35,9 +35,8 @@ newSeq
 		console.log(`sync error : `, err);
 	});
 
-export const addUser = async (full_namePrm, usernamePrm, passwordPrm, rolePrm) => {
+export const addUser = async (usernamePrm, passwordPrm, rolePrm) => {
 	const create = await User.create({
-		full_name: full_namePrm,
 		username: usernamePrm,
 		password: passwordPrm,
 		role: rolePrm,

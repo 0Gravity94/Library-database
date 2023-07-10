@@ -1,9 +1,9 @@
 import User, { addUser, allUsers, deleteUser, getUserByID } from "./user.model.js";
 
 export const newUser = (req, res) => {
-	const { full_name, username, password, role } = req.body;
+	const { username, password, role } = req.body;
 
-	if (!(full_name && username && password && role)) {
+	if (!(username && password && role)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
