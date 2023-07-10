@@ -50,12 +50,13 @@ export const getUserByID = async (idPrm) => {
 	return res;
 };
 
-export const getUserByUsername = async (un) => {
+export const getUsername = async (unPrm) => {
 	const res = await User.findOne({
 		where: {
-			username: un,
+			username: unPrm,
 		},
 	});
+	return res;
 };
 
 export const deleteUser = async (idPrm) => {
