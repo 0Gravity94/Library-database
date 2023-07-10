@@ -17,6 +17,7 @@ import detailRoute from "./src/User/Detail/detail.routing.js";
 import authRoute from "./src/User/Auth/auth.routing.js";
 import borrowRoute from "./src/Borrow/borrows.routing.js";
 import borrowItemRoute from "./src/Borrow/Items/items.routing.js";
+import router from "./src/User/Auth/auth.routes.js";
 
 const port = 3300;
 const app = express();

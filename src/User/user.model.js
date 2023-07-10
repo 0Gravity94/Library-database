@@ -16,6 +16,14 @@ const User = newSeq.define("users", {
 		allowNull: false,
 		unique: true,
 	},
+	password: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
+	role: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
 });
 
 newSeq
@@ -27,10 +35,12 @@ newSeq
 		console.log(`sync error : `, err);
 	});
 
-export const addUser = async (full_namePrm, usernamePrm) => {
+export const addUser = async (full_namePrm, usernamePrm, passwordPrm, rolePrm) => {
 	const create = await User.create({
 		full_name: full_namePrm,
 		username: usernamePrm,
+		password: passwordPrm,
+		role: rolePrm,
 	});
 	console.log("user id ", create.id, " added");
 	return create;
@@ -50,7 +60,7 @@ export const getUserByID = async (idPrm) => {
 	return res;
 };
 
-export const getUsername = async (unPrm) => {
+export const getUserByUserName = async (unPrm) => {
 	const res = await User.findOne({
 		where: {
 			username: unPrm,

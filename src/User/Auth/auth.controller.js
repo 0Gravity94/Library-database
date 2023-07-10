@@ -1,5 +1,7 @@
 import jwtController from "jsonwebtoken";
 
+import { getUserByUserName } from "../user.model.js";
+
 import Auth, { addAuthentication, allAuths, deleteAuth, getAuthByID } from "./auth.model.js";
 
 export const insertAuth = (req, res) => {
@@ -107,57 +109,57 @@ export const updateAuthByID = async (req, res) => {
 	}
 };
 
-// export const loginAuth = async (req, res) => {
-// 	const { username, password } = req.body;
+export const loginAuth = async (req, res) => {
+	const { username, password } = req.body;
 
-// 	if (!(username && password)) {
-// 		return res.status(400).json({
-// 			meta: {
-// 				code: "00-400",
-// 				message: "Validation error",
-// 			},
-// 			data: {},
-// 		});
-// 	}
+	if (!username && !password) {
+		return res.status(400).json({
+			meta: {
+				code: "00-400",
+				message: "some input are required",
+			},
+			data: {},
+		});
+	}
 
-// 	const user = await getUserByUsername(username);
+	const user = await getUserByUserName(username);
 
-// 	if (!user) {
-// 		return res.status(400).json({
-// 			meta: {
-// 				code: "00-404",
-// 				message: "User not found",
-// 			},
-// 			data: {},
-// 		});
-// 	}
+	if (!user) {
+		return res.status(404).json({
+			meta: {
+				code: "00-404",
+				message: "Username not found",
+			},
+			data: {},
+		});
+	}
 
-// 	if (user.password === password) {
-// 		const token = jwtController.sign(
-// 			{
-// 				userid: user.id, //payload (data yang nanti ditampilkan)
-// 				name: user.full_name,
-// 			},
-// 			"silahkan",
-// 			{
-// 				expiresIn: "1d",
-// 			}
-// 		);
-// 		return req.status(200).json({
-// 			meta: {
-// 				code: "00-200",
-// 				message: "success login",
-// 			},
-// 			data: {
-// 				token: token,
-// 			},
-// 		});
-// 	}
-// 	return res.status(400).json({
-// 		meta: {
-// 			code: "00-400",
-// 			message: "Wrong password",
-// 		},
-// 		data: {},
-// 	});
-// };
+	if (user.password === password) {
+		const token = jwtController.sign(
+			{
+				role: user.role,
+				id: user.id,
+			},
+			"silahkan masuk",
+			{
+				expiresIn: "1d",
+			}
+		);
+		return req.status(200).json({
+			meta: {
+				code: "00-200",
+				message: "success login",
+			},
+			data: {
+				token: token,
+			},
+		});
+	}
+	return res.status(400).json({
+		meta: {
+			code: "00-400",
+			message: "Wrong password",
+		},
+		data: {},
+	});
+};

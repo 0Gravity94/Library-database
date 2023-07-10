@@ -16,12 +16,12 @@ export const tokenVerify = (req, res, next) => {
 	const token = auth.split(" ")[1];
 
 	try {
-		const decode = JSONtoken.verify(token, "silahkan");
+		const decode = JSONtoken.verify(token, "silahkan masuk");
 	} catch (error) {
 		return res.status(401).json({
 			meta: {
 				code: "AUTH-401",
-				message: "Invalid bearer",
+				message: "Invalid token",
 			},
 			data: {},
 		});

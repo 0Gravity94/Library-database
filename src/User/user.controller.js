@@ -1,9 +1,9 @@
-import User, { addUser, allUsers, deleteUser, getUserByID, getUsername } from "./user.model.js";
+import User, { addUser, allUsers, deleteUser, getUserByID } from "./user.model.js";
 
 export const newUser = (req, res) => {
-	const { full_name, username } = req.body;
+	const { full_name, username, password, role } = req.body;
 
-	if (!full_name && username) {
+	if (!(full_name && username && password && role)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -13,12 +13,12 @@ export const newUser = (req, res) => {
 		});
 	}
 
-	const respModel = addUser(full_name, username);
+	const respModel = addUser(full_name, username, password, role);
 
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "success insert",
+			message: `new member : ${username}`,
 		},
 		data: {
 			respModel,
@@ -45,32 +45,6 @@ export const getByID = async (req, res) => {
 		meta: {
 			code: "01-200",
 			message: `get user by id: ${id}`,
-		},
-		data: {
-			respModel,
-		},
-	});
-};
-
-export const getUserByUsername = async (req, res) => {
-	const { username } = req.params;
-
-	if (!username) {
-		return res.status(400).json({
-			meta: {
-				code: "01-400",
-				message: "Validation error",
-			},
-			data: {},
-		});
-	}
-
-	const respModel = await getUsername(username);
-
-	return res.status(200).json({
-		meta: {
-			code: "01-200",
-			message: `get user by username: ${username}`,
 		},
 		data: {
 			respModel,
