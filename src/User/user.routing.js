@@ -6,7 +6,6 @@ const userRoute = Router();
 userRoute.post("", newUser);
 
 userRoute.get("/:id", getByID);
-// userRoute.get("/user/:username", getUserByUsername);
 userRoute.get("", getAllUsers);
 
 userRoute.delete("/:id", deleteUserByID);
