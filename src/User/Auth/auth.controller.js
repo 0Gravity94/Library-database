@@ -3,9 +3,9 @@ import { getUserByUsername } from "../user.model.js";
 import Auth, { addAuthentication, allAuths, deleteAuth, getAuthByID } from "./auth.model.js";
 
 export const insertAuth = (req, res) => {
-	const { user_id, password } = req.body;
+	const { user_id, password, role } = req.body;
 
-	if (!(user_id && password)) {
+	if (!(user_id && password && role)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -15,7 +15,7 @@ export const insertAuth = (req, res) => {
 		});
 	}
 
-	const respModel = addAuthentication(user_id, password);
+	const respModel = addAuthentication(user_id, password, role);
 
 	return res.status(200).json({
 		meta: {

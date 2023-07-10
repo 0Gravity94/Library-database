@@ -18,6 +18,10 @@ const Auth = newSeq.define("auths", {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
+	role: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
 });
 
 newSeq
@@ -29,10 +33,11 @@ newSeq
 		console.log(`sync error : `, err);
 	});
 
-export const addAuthentication = async (user_idPrm, passwordPrm) => {
+export const addAuthentication = async (user_idPrm, passwordPrm, rolePrm) => {
 	const create = await Auth.create({
 		user_id: user_idPrm,
 		password: passwordPrm,
+		role: rolePrm,
 	});
 	console.log("auth id ", create.id, " added");
 	return create;
