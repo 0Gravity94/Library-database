@@ -14,6 +14,10 @@ const Detail = newSeq.define("users_details", {
 			key: "id",
 		},
 	},
+	full_name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
 	phone: {
 		type: DataTypes.INTEGER,
 		allowNull: false,
@@ -41,9 +45,10 @@ newSeq
 		console.log(`sync error : `, err);
 	});
 
-export const addDetail = async (user_idPrm, phonePrm, cityPrm, dobPrm, genderPrm) => {
+export const addDetail = async (user_idPrm, full_namePrm, phonePrm, cityPrm, dobPrm, genderPrm) => {
 	const create = await Detail.create({
 		user_id: user_idPrm,
+		full_name: full_namePrm,
 		phone: phonePrm,
 		city: cityPrm,
 		date_of_birth: dobPrm,
@@ -58,19 +63,19 @@ export const allDetails = async () => {
 	return response;
 };
 
-export const getDetailByID = async (idPrm) => {
+export const getDetailByID = async (user_idPrm) => {
 	const res = await Detail.findOne({
 		where: {
-			id: idPrm,
+			user_id: user_idPrm,
 		},
 	});
 	return res;
 };
 
-export const deleteUserDetail = async (idPrm) => {
+export const deleteUserDetail = async (user_idPrm) => {
 	const response = await Detail.destroy({
 		where: {
-			id: idPrm,
+			user_id: user_idPrm,
 		},
 	});
 	return response;

@@ -1,9 +1,9 @@
 import Detail, { addDetail, allDetails, deleteUserDetail, getDetailByID } from "./detail.model.js";
 
 export const newDetail = (req, res) => {
-	const { user_id, phone, city, date_of_birth, gender } = req.body;
+	const { user_id, full_name, phone, city, date_of_birth, gender } = req.body;
 
-	if (!(user_id && phone && city && date_of_birth && gender)) {
+	if (!(user_id && full_name && phone && city && date_of_birth && gender)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -13,12 +13,12 @@ export const newDetail = (req, res) => {
 		});
 	}
 
-	const respModel = addDetail(user_id, phone, city, date_of_birth, gender);
+	const respModel = addDetail(user_id, full_name, phone, city, date_of_birth, gender);
 
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "success insert",
+			message: `Adding detail user to : ${full_name}`,
 		},
 		data: {
 			id: respModel,
@@ -33,7 +33,7 @@ export const getByID = async (req, res) => {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
-				message: "Validation error",
+				message: `member with id: ${id} doesn't exist`,
 			},
 			data: {},
 		});
@@ -58,7 +58,7 @@ export const getAllDetails = async (req, res) => {
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: "success get",
+			message: `success getting all details`,
 		},
 		data: {
 			respModel,
@@ -96,7 +96,7 @@ export const updateUserDetailByID = async (req, res) => {
 	try {
 		await Detail.update(req.body, {
 			where: {
-				id: req.params.id,
+				user_id: req.params.id,
 			},
 		});
 		res.status(201).json({ msg: "success update user detail" });

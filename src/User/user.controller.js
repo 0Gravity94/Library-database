@@ -13,7 +13,7 @@ export const newUser = (req, res) => {
 		});
 	}
 
-	const respModel = addUser(full_name, username, password, role);
+	const respModel = addUser(username, password, role);
 
 	return res.status(200).json({
 		meta: {

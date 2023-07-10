@@ -4,9 +4,12 @@ import { deleteDetailByID, getAllDetails, getByID, newDetail, updateUserDetailBy
 const detailRoute = Router();
 
 detailRoute.post("", newDetail);
+
 detailRoute.get("/:id", getByID);
 detailRoute.get("", getAllDetails);
+
 detailRoute.delete("/:id", deleteDetailByID);
+
 detailRoute.put("/:id", updateUserDetailByID);
 
 export default detailRoute;
