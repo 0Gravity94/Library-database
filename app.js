@@ -6,7 +6,6 @@ import Author from "./src/Author/author.model.js";
 import User from "./src/User/user.model.js";
 import Detail from "./src/User/Detail/detail.model.js";
 import Genre from "./src/Genre/genres.model.js";
-import Borrow from "./src/Borrow/borrows.model.js";
 import Borrow_item from "./src/Borrow/Items/items.model.js";
 import route from "./src/Book/book.routing.js";
 import authorRoute from "./src/Author/author.routing.js";
@@ -14,7 +13,6 @@ import userRoute from "./src/User/user.routing.js";
 import genreRoute from "./src/Genre/genres.routing.js";
 import detailRoute from "./src/User/Detail/detail.routing.js";
 import authRoute from "./src/User/Auth/auth.routing.js";
-import borrowRoute from "./src/Borrow/borrows.routing.js";
 import borrowItemRoute from "./src/Borrow/Items/items.routing.js";
 
 const port = 3300;
@@ -32,7 +30,6 @@ app.use("/authors", authorRoute);
 app.use("/users", userRoute);
 app.use("/genres", genreRoute);
 app.use("/users_details", detailRoute);
-app.use("/borrows", borrowRoute);
 app.use("/borrow_items", borrowItemRoute);
 app.use("/login", authRoute);
 

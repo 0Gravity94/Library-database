@@ -1,34 +1,42 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import { newSeq } from "../../../connection.js";
 
-const Borrow_item = newSeq.define("borrow_items", {
-	id: {
-		type: DataTypes.INTEGER,
-		autoIncrement: true,
-		primaryKey: true,
-	},
-	borrow_id: {
-		type: DataTypes.INTEGER,
-		references: {
-			model: "borrows",
-			key: "id",
+const Borrow_item = newSeq.define(
+	"borrow_items",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		user_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: "users",
+				key: "id",
+			},
+		},
+		book_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: "books",
+				key: "id",
+			},
+		},
+		status: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		returned_at: {
+			type: DataTypes.DATE,
 		},
 	},
-	book_id: {
-		type: DataTypes.INTEGER,
-		references: {
-			model: "books",
-			key: "id",
-		},
-	},
-	status: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	returned_at: {
-		type: DataTypes.DATE,
-	},
-});
+	{
+		Sequelize,
+		timestamps: false,
+		tableName: "borrow_items",
+	}
+);
 
 newSeq
 	.sync()
@@ -39,9 +47,9 @@ newSeq
 		console.log(`sync error : `, err);
 	});
 
-export const addBorrowItem = async (borrow_idPrm, book_idPrm, statusPrm, returned_atPrm) => {
+export const addBorrowItem = async (user_idPrm, book_idPrm, statusPrm, returned_atPrm) => {
 	const create = await Borrow_item.create({
-		borrow_id: borrow_idPrm,
+		user_id: user_idPrm,
 		book_id: book_idPrm,
 		status: statusPrm,
 		returned_at: returned_atPrm,
@@ -50,10 +58,10 @@ export const addBorrowItem = async (borrow_idPrm, book_idPrm, statusPrm, returne
 	return create;
 };
 
-export const getBorrowItemByID = async (idPrm) => {
-	const res = await Borrow_item.findOne({
+export const getBorrowItemByID = async (user_idPrm) => {
+	const res = await Borrow_item.findAll({
 		where: {
-			id: idPrm,
+			user_id: user_idPrm,
 		},
 	});
 	return res;

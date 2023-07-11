@@ -1,30 +1,34 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import { newSeq } from "../../connection.js";
 
-const User = newSeq.define("users", {
-	id: {
-		type: DataTypes.INTEGER,
-		autoIncrement: true,
-		primaryKey: true,
+const User = newSeq.define(
+	"users",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		username: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true,
+		},
+		password: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		role: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
 	},
-	// full_name: {
-	// 	type: DataTypes.STRING,
-	// 	allowNull: false,
-	// },
-	username: {
-		type: DataTypes.STRING,
-		allowNull: false,
-		unique: true,
-	},
-	password: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	role: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-});
+	{
+		Sequelize,
+		timestamps: false,
+		tableName: "users",
+	}
+);
 
 newSeq
 	.sync()

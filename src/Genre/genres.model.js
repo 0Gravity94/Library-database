@@ -1,17 +1,25 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import { newSeq } from "../../connection.js";
 
-const Genre = newSeq.define("genres", {
-	id: {
-		type: DataTypes.INTEGER,
-		autoIncrement: true,
-		primaryKey: true,
+const Genre = newSeq.define(
+	"genres",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		genre_name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
 	},
-	genre_name: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-});
+	{
+		Sequelize,
+		timestamps: false,
+		tableName: "genres",
+	}
+);
 
 newSeq
 	.sync()

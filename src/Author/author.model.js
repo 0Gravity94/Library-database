@@ -1,24 +1,32 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import { newSeq } from "../../connection.js";
 
-const Author = newSeq.define("authors", {
-	id: {
-		type: DataTypes.INTEGER,
-		autoIncrement: true,
-		primaryKey: true,
+const Author = newSeq.define(
+	"authors",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		full_name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		gender: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		works: {
+			type: DataTypes.STRING,
+		},
 	},
-	full_name: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	gender: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	works: {
-		type: DataTypes.STRING,
-	},
-});
+	{
+		Sequelize,
+		timestamps: false,
+		tableName: "authors",
+	}
+);
 
 newSeq
 	.sync()
@@ -61,14 +69,5 @@ export const deleteAuthor = async (idPrm) => {
 	});
 	return response;
 };
-
-// export const updateAuthor = async (idPrm) => {
-// 	const response = await Author.update({
-// 		where: {
-// 			id: idPrm,
-// 		},
-// 	});
-// 	return response;
-// };
 
 export default Author;

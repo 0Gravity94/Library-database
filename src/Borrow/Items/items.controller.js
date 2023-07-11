@@ -1,9 +1,9 @@
 import Borrow_item, { addBorrowItem, allBorrowItems, deleteBorrowItem, getBorrowItemByID } from "./items.model.js";
 
 export const borrowItem = async (req, res) => {
-	const { borrow_id, book_id, status, returned_at } = req.body;
+	const { user_id, book_id, status, returned_at } = req.body;
 
-	if (!(borrow_id && book_id && status)) {
+	if (!(user_id && book_id && status)) {
 		return res.status(400).json({
 			meta: {
 				code: "01-400",
@@ -13,7 +13,7 @@ export const borrowItem = async (req, res) => {
 		});
 	}
 
-	const respModel = await addBorrowItem(borrow_id, book_id, status, returned_at);
+	const respModel = await addBorrowItem(user_id, book_id, status, returned_at);
 
 	return res.status(200).json({
 		meta: {
@@ -44,7 +44,7 @@ export const getByID = async (req, res) => {
 	return res.status(200).json({
 		meta: {
 			code: "01-200",
-			message: `get borrow item id: ${id}`,
+			message: `get borrow items by user id: ${id}`,
 		},
 		data: {
 			respModel,

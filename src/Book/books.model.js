@@ -1,39 +1,47 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import { newSeq } from "../../connection.js";
 
-const Book = newSeq.define("books", {
-	id: {
-		type: DataTypes.INTEGER,
-		autoIncrement: true,
-		primaryKey: true,
-	},
-	title: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	genre_id: {
-		type: DataTypes.INTEGER,
-		references: {
-			model: "genres",
-			key: "id",
+const Book = newSeq.define(
+	"books",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		title: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		genre_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: "genres",
+				key: "id",
+			},
+		},
+		author_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: "authors",
+				key: "id",
+			},
+		},
+		status: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		quantity: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
 		},
 	},
-	author_id: {
-		type: DataTypes.INTEGER,
-		references: {
-			model: "author_works",
-			key: "author_id",
-		},
-	},
-	status: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	quantity: {
-		type: DataTypes.INTEGER,
-		allowNull: false,
-	},
-});
+	{
+		Sequelize,
+		timestamps: false,
+		tableName: "books",
+	}
+);
 
 newSeq
 	.sync()
