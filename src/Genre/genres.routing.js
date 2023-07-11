@@ -1,12 +1,16 @@
 import { Router } from "express";
+import { tokenVerify } from "../Middleware/auth.middleware.js";
 import { deleteGenreByID, getAllGenres, getByID, newGenre, updateGenreByID } from "./genres.controller.js";
 
 const genreRoute = Router();
 
-genreRoute.post("", newGenre);
-genreRoute.get("/:id", getByID);
-genreRoute.get("", getAllGenres);
-genreRoute.delete("/:id", deleteGenreByID);
-genreRoute.put("/:id", updateGenreByID);
+genreRoute.post("", tokenVerify, newGenre);
+
+genreRoute.get("/:id", tokenVerify, getByID);
+genreRoute.get("", tokenVerify, getAllGenres);
+
+genreRoute.delete("/:id", tokenVerify, deleteGenreByID);
+
+genreRoute.put("/:id", tokenVerify, updateGenreByID);
 
 export default genreRoute;
